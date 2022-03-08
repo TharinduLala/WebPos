@@ -1,16 +1,18 @@
-
+$("#customersLink").click(function () {
+    loadAllCustomers();
+});
 $('#btnSaveCustomer').click(function () {
-    saveCustomer();
+        saveCustomer();
 });
 
 $('#btnUpdateCustomer').click(function () {
-
+    let updateId = $("#txtCustomerId").val();
+    updateCustomer(updateId);
 });
 
 $('#btnRemoveCustomer').click(function () {
-    let customer = searchCustomer($("#txtCustomerId").val());
-    removeCustomer(customer.getCustomerId());
-
+    let removeId = $("#txtCustomerId").val();
+    removeCustomer(removeId);
 });
 
 $('#btnClearCustomerFields').click(function () {
@@ -32,19 +34,22 @@ $('#btnSearchCustomer').click(function () {
 });
 
 function saveCustomer() {
-    let response = confirm("Do you want to add this Customer..?");
-    if (response) {
-        let customerID = $("#txtCustomerId").val();
-        let customerName = $("#txtCustomerName").val();
-        let customerAddress = $("#txtCustomerAddress").val();
-        let customerContact = $("#txtCustomerContact").val();
+    let customerID = $("#txtCustomerId").val();
+    if (isCustomerExist(customerID)){
+        alert("This customer id already exist..");
+    }else {
+        let response = confirm("Do you want to add this Customer..?");
+        if (response) {
+            let customerName = $("#txtCustomerName").val();
+            let customerAddress = $("#txtCustomerAddress").val();
+            let customerContact = $("#txtCustomerContact").val();
 
-        let customerDto = new CustomerDto(customerID, customerName, customerAddress, customerContact);
+            let customerDto = new CustomerDto(customerID, customerName, customerAddress, customerContact);
 
-        customerDB.push(customerDto);
-        clearAll();
+            customerDB.push(customerDto);
+            clearAll();
+        }
     }
-
 }
 
 function searchCustomer(cId) {
@@ -54,18 +59,21 @@ function searchCustomer(cId) {
         }
     }
 }
+
 function removeCustomer(removeId) {
-    for (let i = 0; i < customerDB.length; i++) {
-        if (customerDB[i].getCustomerId()===removeId) {
-            customerDB.splice(i,1);
-            alert(i);
+    let response = confirm("Do you want to remove this Customer..?");
+    if (response) {
+        for (let i = 0; i < customerDB.length; i++) {
+            if (customerDB[i].getCustomerId() === removeId) {
+                customerDB.splice(i, 1);
+            }
         }
+        loadAllCustomers();
+        clearAll();
     }
-    loadAllCustomers();
-    clearAll();
 }
 
-function updateCustomer() {
+function updateCustomer(updateId) {
     let response = confirm("Do you want to save changes..?");
     if (response) {
         let customerID = $("#txtCustomerId").val();
@@ -76,13 +84,18 @@ function updateCustomer() {
         let customerDto = new CustomerDto(customerID, customerName, customerAddress, customerContact);
 
         for (let i = 0; i < customerDB.length; i++) {
-            if (customerDB[i].getCustomerId()===removeId) {
-                customerDB.splice(i,1);
-                alert(i);
+            if (customerDB[i].getCustomerId()===updateId) {
+                customerDB[i]=customerDto;
             }
         }
         loadAllCustomers();
         clearAll();
+    }
+}
+
+function isCustomerExist(id) {
+    for (let i = 0; i < customerDB.length; i++) {
+        return customerDB[i].getCustomerId() === id;
     }
 }
 

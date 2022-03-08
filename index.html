@@ -72,17 +72,71 @@
     <main class="container-fluid">
 
       <!---------------------- New Order ---------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="addNewCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Customer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="mb-2">
+                                <label class="form-label" for="txtCusid">Customer Id</label>
+                                <input
+                                        class="form-control"
+                                        id="txtCusid"
+                                        placeholder="Customer Id"
+                                        type="text"
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="txtCusname"
+                                >Customer name</label
+                                >
+                                <input
+                                        class="form-control"
+                                        id="txtCusname"
+                                        placeholder="Customer name"
+                                        type="text"
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="txtCusaddress">Address</label>
+                                <input
+                                        class="form-control"
+                                        id="txtCusaddress"
+                                        placeholder="Customer Address"
+                                        type="text"
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="txtCusContact"
+                                >Contact Number</label
+                                >
+                                <input
+                                        class="form-control"
+                                        id="txtCusContact"
+                                        placeholder="Contact No."
+                                        type="text"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="btnCustomerSave" type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       <section class="container-fluid" id="newOrderSection">
         <h1 class="h1"><span class="badge bg-dark"><i class="bi bi-cart-plus"></i></span>New Order</h1>
-        <button
-          class="btn btn-primary mb-2"
-          data-bs-target="#addCustomer"
-          data-bs-toggle="modal"
-          type="button"
-        >
-          Add new customer
-        </button>
-
+          <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addNewCustomerModal">
+              Add New Customer
+          </button>
         <section class="row m-1 justify-content-around">
           <div
             class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 border p-2 mt-3"
@@ -97,6 +151,7 @@
                   class="form-control form-control-sm"
                   id="txtNewOrderId"
                   type="text"
+                  readonly
                 />
               </div>
 
@@ -107,7 +162,8 @@
                 <input
                   class="form-control form-control-sm"
                   id="txtNewOrderDate"
-                  type="date"
+                  type="text"
+                  readonly
                 />
               </div>
 
@@ -137,6 +193,7 @@
                   class="form-control form-control-sm"
                   id="txtNewOrdercusName"
                   type="text"
+                  readonly
                 />
               </div>
               <div class="col-md-6">
@@ -147,16 +204,18 @@
                   class="form-control form-control-sm"
                   id="txtNewOrdercusAddress"
                   type="text"
+                  readonly
                 />
               </div>
               <div class="col-md-6">
-                <label class="form-label" for="txtNewOrdercusSalary"
-                  >Salary</label
+                <label class="form-label" for="txtNewOrdercusContact"
+                  >Contact</label
                 >
                 <input
                   class="form-control form-control-sm"
-                  id="txtNewOrdercusSalary"
+                  id="txtNewOrdercusContact"
                   type="text"
+                  readonly
                 />
               </div>
             </form>
@@ -188,6 +247,7 @@
                   class="form-control form-control-sm"
                   id="txtNewOrderItemCode"
                   type="text"
+                  readonly
                 />
               </div>
 
@@ -199,6 +259,7 @@
                   class="form-control form-control-sm"
                   id="txtNewOrderItemDescription"
                   type="text"
+                  readonly
                 />
               </div>
               <div class="col-md-6">
@@ -209,6 +270,7 @@
                   class="form-control form-control-sm"
                   id="txtNewOrderItemUnitPrice"
                   type="text"
+                  readonly
                 />
               </div>
               <div class="col-md-6">
@@ -219,6 +281,7 @@
                   class="form-control form-control-sm"
                   id="txtNewOrderItemQtyOnH"
                   type="number"
+                  readonly
                 />
               </div>
               <div class="col-md-6">
@@ -242,14 +305,14 @@
             class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 border p-2 overflow-auto mt-3"
             style="height: 320px"
           >
-            <table class="table">
+            <table class="table  table-hover">
               <thead class="table-info">
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Qty</th>
-                  <th scope="col">Total</th>
-                  <th scope="col">Remove</th>
+                  <th scope="col" class="position-sticky top-0" >Name</th>
+                  <th scope="col" class="position-sticky top-0" >Price</th>
+                  <th scope="col" class="position-sticky top-0" >Qty</th>
+                  <th scope="col" class="position-sticky top-0" >Total</th>
+                  <th scope="col" class="position-sticky top-0" >Remove</th>
                 </tr>
               </thead>
               <tbody>
@@ -272,7 +335,7 @@
                   <td>140</td>
                 </tr>
                 <tr>
-                  <td>Milk powder 400g</td>
+                  <td>Milk powderasf hgbajhgf hgajgfdhjg 400g</td>
                   <td>600</td>
                   <td>2</td>
                   <td>1200</td>
@@ -282,6 +345,24 @@
                   <td>280</td>
                   <td>1</td>
                   <td>280</td>
+                </tr>
+                <tr>
+                    <td>coconut oil 1 liter</td>
+                    <td>280</td>
+                    <td>1</td>
+                    <td>280</td>
+                </tr>
+                <tr>
+                    <td>coconut oil 1 liter</td>
+                    <td>280</td>
+                    <td>1</td>
+                    <td>280</td>
+                </tr>
+                <tr>
+                    <td>coconut oil 1 liter</td>
+                    <td>280</td>
+                    <td>1</td>
+                    <td>280</td>
                 </tr>
               </tbody>
             </table>
@@ -509,97 +590,7 @@
                 </tr>
                 </thead>
                 <tbody id="itemTable" >
-                <tr>
-                  <td>Kate</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Anna</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jerry</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jerry</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jerry</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jerry</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jerry</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jerry</td>
-                  <td>USA / The United Kingdom / China / Russia</td>
-                  <td>
-                    New York City / Warsaw / Lodz / Amsterdam / London / Chicago
-                  </td>
-                  <td>
-                    Web Designer /UX designer / Ul designer / JavaScript
-                    Developer
-                  </td>
-                </tr>
                 </tbody>
-
-
               </table>
             </div>
           </section>
@@ -858,12 +849,18 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/jQuery/jquery-3.6.0.min.js"></script>
     <script src="controller/CustomerController.js"></script>
+    <script src="controller/ItemController.js"></script>
+    <script src="controller/NewOrderController.js"></script>
+    <script src="controller/OrderController.js"></script>
     <script src="model/Customer.js"></script>
+    <script src="model/Item.js"></script>
+    <script src="model/Order.js"></script>
+    <script src="model/OrderDetails.js"></script>
     <script src="db/Db.js"></script>
 
     <script>
 
-      /*  Navigation Script Start  */
+
       $("#newOrderSection").css("display", "block");
       $("#customerSection").css("display", "none");
       $("#itemsSection").css("display", "none");
@@ -893,7 +890,7 @@
         $("#itemsSection").css("display", "none");
         $("#ordersSection").css("display", "block");
       });
-      /*  Navigation Script end  */
+
     </script>
   </body>
 </html>
