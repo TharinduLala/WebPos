@@ -1,4 +1,4 @@
-$("#itemsLink").click(function () {
+$(document).ready(function () {
     loadAllItems();
 });
 

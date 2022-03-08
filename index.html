@@ -228,27 +228,12 @@
                 <h5>Item Select</h5>
               </div>
               <div class="col-md-6">
-                <label class="form-label" for="txtNewOrderItemName">Item</label>
+                <label class="form-label" for="txtNewOrderItemCode">Item Code</label>
                 <select
                   class="form-select form-select-sm"
-                  id="txtNewOrderItemName"
-                >
-                  <option>select item...</option>
-                  <option>Item 01</option>
-                  <option>Item 02</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label" for="txtNewOrderItemCode"
-                  >Item Code</label
-                >
-                <input
-                  class="form-control form-control-sm"
                   id="txtNewOrderItemCode"
-                  type="text"
-                  readonly
-                />
+                >
+                </select>
               </div>
 
               <div class="col-md-6">
@@ -859,7 +844,6 @@
     <script src="db/Db.js"></script>
 
     <script>
-
 
       $("#newOrderSection").css("display", "block");
       $("#customerSection").css("display", "none");

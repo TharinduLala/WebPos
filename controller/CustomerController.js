@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    loadAllCustomers();
+});
+
 $("#customersLink").click(function () {
     loadAllCustomers();
 });
