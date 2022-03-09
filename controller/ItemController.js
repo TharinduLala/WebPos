@@ -1,5 +1,7 @@
-$(document).ready(function () {
-    loadAllItems();
+$("#itemsLink").click(function () {
+    loadAllItems()
+    $('#btnUpdateItem').attr('disabled', true);
+    $('#btnRemoveItem').attr('disabled', true);
 });
 
 $('#btnSaveItem').click(function () {
@@ -28,6 +30,8 @@ $('#btnSearchItem').click(function () {
         $("#txtUnitPrice").val(item.getUnitPrice());
         $("#txtQtyOnHand").val(item.getQtyOnHand());
         $("#txtItemCode").attr('readonly', true);
+        $('#btnUpdateItem').attr('disabled', false);
+        $('#btnRemoveItem').attr('disabled', false);
     } else {
         clearItemFields();
         alert("No Such a Item");
@@ -124,5 +128,7 @@ function loadAllItems() {
 function clearItemFields() {
     $('#txtItemCode,#txtItemDescription,#txtUnitPrice,#txtQtyOnHand,#txtSearchItem').val("");
     $("#txtItemCode").attr('readonly', false);
+    $('#btnUpdateItem').attr('disabled', true);
+    $('#btnRemoveItem').attr('disabled', true);
     loadAllItems();
 }

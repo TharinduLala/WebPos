@@ -1,10 +1,11 @@
-$(document).ready(function () {
-    loadAllCustomers();
-});
+
 
 $("#customersLink").click(function () {
     loadAllCustomers();
+    $('#btnUpdateCustomer').attr('disabled', true);
+    $('#btnRemoveCustomer').attr('disabled', true);
 });
+
 $('#btnSaveCustomer').click(function () {
         saveCustomer();
 });
@@ -31,6 +32,8 @@ $('#btnSearchCustomer').click(function () {
         $("#txtCustomerAddress").val(customer.getCustomerAddress());
         $("#txtCustomerContact").val(customer.getCustomerContact());
         $("#txtCustomerId").attr('readonly', true);
+        $('#btnUpdateCustomer').attr('disabled', false);
+        $('#btnRemoveCustomer').attr('disabled', false);
     } else {
         clearAll();
         alert("No Such a Customer");
@@ -128,4 +131,7 @@ function clearAll() {
     $('#txtCustomerId,#txtCustomerName,#txtCustomerAddress,#txtCustomerContact,#txtSearchCustomer').val("");
     $("#txtCustomerId").attr('readonly', false);
     loadAllCustomers();
+    $('#btnUpdateCustomer').attr('disabled', true);
+    $('#btnRemoveCustomer').attr('disabled', true);
+
 }
