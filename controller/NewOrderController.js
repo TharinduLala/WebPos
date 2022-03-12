@@ -41,12 +41,66 @@ $('#btnAddToCart').click(function () {
     let oderQty = $('#txtNewOrderOrderedQty').val();
     let total=unitPrice*oderQty;
     let button=`<button  type="button" class="btn btn-danger btn-sm"  onclick="deleteRow(this);">Remove</button>`;
-    let row = `<tr><td>${item}</td><td>${unitPrice}</td><td>${oderQty}</td><td>${total}</td><td>${button}</td></tr>`;
-    $("#tblNewOrderCart").append(row);
+    addCart(item,unitPrice,oderQty,total,button);
+    calculateTotal();
+    $('#btnProceedOrder').attr('disabled', true);
 });
 
+$('#btnCalculate').click(function () {
+    let total =parseInt($('#txtNewOrderTotal').val());
+    //let discount =parseInt($('#txtNewOrderDiscount').val());
+    let temp =$('#txtNewOrderDiscount').val();
+    let discount;
+    if(temp===""){
+        discount=0;
+    }else {
+        discount =parseInt(temp);
+    }
+
+    let netTotal =total-((total*discount)/100);
+    $('#txtNewOrderNetTotal').val(netTotal);
+    $('#btnProceedOrder').attr('disabled', false);
+});
+
+$('#btnProceedOrder').click(function () {
+    let orderDetail = [];
+
+    $("#tblNewOrderCart tr").each(function() {
+        orderDetail.push(new OrderDetailsDto(
+            this.cells[0].innerHTML,
+            this.cells[1].innerHTML,
+            this.cells[2].innerHTML,
+            this.cells[3].innerHTML
+        ));
+    });
+
+});
+$('#btnClearSelection').click(function () {
+   clearSelection();
+});
+$('#btnCancelOrder').click(function () {
+    clearSelection();
+    setDate();setNewOrderId();
+    $('#btnProceedOrder').attr('disabled', false);
+    $('#txtNewOrderTotal').val("");
+    $('#txtNewOrderDiscount').val("");
+    $('#txtNewOrderNetTotal').val("");
+    $("#txtNewOrdercusId").val("");
+    $("#txtNewOrdercusName").val("");
+    $("#txtNewOrdercusAddress").val("");
+    $("#txtNewOrdercusContact").val("");
+});
 function deleteRow(btn) {
+    /*let b=false;
+    if(!b){
+        let itemCode = $(btn).closest("tr").find("td:eq(0)").text();
+        b=true;
+    }
+    if(b){
+        $(btn).closest("tr").remove();
+    }*/
     $(btn).closest("tr").remove();
+    calculateTotal();
 }
 
 function customerSave() {
@@ -89,4 +143,51 @@ function loadItemCodes() {
         let data = `<option >${i.getItemCode()}</option>`;
         $("#txtNewOrderItemCode").append(data);
     }
+}
+
+function calculateTotal() {
+    let total=0;
+    $("#tblNewOrderCart tr").each(function() {
+            let rowTotal = parseInt(this.cells[3].innerHTML);
+            total+=rowTotal;
+
+    });
+    $('#txtNewOrderTotal').val(total);
+}
+
+function addCart(item,unitPrice,qty,total,btn) {
+    let not=true;
+    let currentQty;
+    let removeRow;
+    $("#tblNewOrderCart tr").each(function() {
+        if(this.cells[0].innerHTML===item) {
+            not=false;
+            currentQty=parseInt(this.cells[2].innerHTML);
+            removeRow=$(this);
+        }
+    });
+    let newQty=currentQty+parseInt(qty);
+    let newTot=newQty*unitPrice;
+    let qtyOnHand=parseInt($('#txtNewOrderItemQtyOnH').val());
+    if (qty>qtyOnHand||newQty>qtyOnHand){
+        alert("not enough qty");
+    }else {
+        if (not){
+            let row = `<tr><td>${item}</td><td>${unitPrice}</td><td>${qty}</td><td>${total}</td><td>${btn}</td></tr>`;
+            $("#tblNewOrderCart").append(row);
+        }else {
+            removeRow.remove();
+            let row = `<tr><td>${item}</td><td>${unitPrice}</td><td>${newQty}</td><td>${newTot}</td><td>${btn}</td></tr>`;
+            $("#tblNewOrderCart").append(row);
+        }
+    }
+}
+
+function clearSelection() {
+    $('#txtNewOrderItemCode').val("");
+    $('#txtNewOrderItemUnitPrice').val("");
+    $('#txtNewOrderItemDescription').val("");
+    $('#txtNewOrderItemQtyOnH').val("");
+    $('#txtNewOrderOrderedQty').val("");
+    loadItemCodes();
 }

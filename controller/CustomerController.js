@@ -124,6 +124,8 @@ function loadAllCustomers() {
         $('#txtCustomerAddress').val(address);
         $('#txtCustomerContact').val(contact);
         $("#txtCustomerId").attr('readonly', true);
+        $('#btnUpdateCustomer').attr('disabled', false);
+        $('#btnRemoveCustomer').attr('disabled', false);
     });
 }
 

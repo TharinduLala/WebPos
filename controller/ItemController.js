@@ -122,6 +122,8 @@ function loadAllItems() {
         $("#txtUnitPrice").val(unitPrice);
         $("#txtQtyOnHand").val(qtyOnHand);
         $("#txtItemCode").attr('readonly', true);
+        $('#btnUpdateItem').attr('disabled', false);
+        $('#btnRemoveItem').attr('disabled', false);
     });
 }
 

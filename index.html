@@ -139,7 +139,7 @@
           </button>
         <section class="row m-1 justify-content-around">
           <div
-            class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 border p-2 mt-3"
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 border p-2 mt-1"
           >
             <form class="row g-2">
               <div class="bg-success text-center text-white card-header">
@@ -221,7 +221,7 @@
             </form>
           </div>
           <div
-            class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 border p-2 mt-3"
+            class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 border p-2 mt-1"
           >
             <form class="row g-2">
               <div class="bg-success text-center text-white card-header">
@@ -281,14 +281,81 @@
               </div>
             </form>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button id="btnAddToCart" class="btn btn-secondary mt-3" type="button">
-                Add Item
+              <button id="btnClearSelection" class="btn btn-warning mt-3" type="button">
+                Clear
               </button>
+                <button id="btnAddToCart" class="btn btn-secondary mt-3" type="button">
+                    Add Item
+                </button>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 border p-2 mt1"
+          >
+            <div class="row g-2">
+              <div class="col-md-5">
+                <label class="form-label" for="txtNewOrderTotal"
+                >Total</label
+                >
+                <input
+                        class="form-control form-control-sm"
+                        id="txtNewOrderTotal"
+                        type="number"
+                        readonly
+                />
+              </div>
+
+              <div class="col-md-5">
+                <label class="form-label" for="txtNewOrderDiscount"
+                >Discount(%)</label
+                >
+                <input
+                        class="form-control form-control-sm"
+                        id="txtNewOrderDiscount"
+                        type="number"
+                />
+              </div>
+
+                <div class="col-md-12">
+                    <button
+                            class="btn btn-sm btn-secondary mt-1 col-12"
+                            type="button" id="btnCalculate"
+                    >
+                        Calculate
+                    </button>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label" for="txtNewOrderNetTotal"
+                    >Net Total</label
+                    >
+                    <input
+                            class="form-control form-control-sm"
+                            id="txtNewOrderNetTotal"
+                            type="number"
+                            readonly
+                    />
+                </div>
+                <div class="col-md-12">
+                    <button
+                            class="btn btn-sm btn-success mt-2 col-12"
+                            type="button" id="btnProceedOrder"
+                    >
+                        Proceed
+                    </button>
+                </div>
+                <div class="col-md-12">
+                    <button
+                            class="btn btn-sm btn-warning mt-1 col-12"
+                            type="button" id="btnCancelOrder"
+                    >
+                        Cancel Order
+                    </button>
+                </div>
+
             </div>
           </div>
           <div
-            class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 border p-2 overflow-auto mt-3"
-            style="height: 320px"
+            class=" overflow-auto mt-3col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 border p-2"
+            style="height: 25vh"
           >
             <table class="table  table-hover">
               <thead class="table-info">
@@ -304,68 +371,7 @@
               </tbody>
             </table>
           </div>
-          <div
-            class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 border p-2 mt-3"
-          >
-            <div class="row g-3">
-              <div class="col-md-4">
-                <label class="form-label" for="txtNewOrderNetTotal"
-                  >Net Total</label
-                >
-                <input
-                  class="form-control form-control-sm"
-                  id="txtNewOrderNetTotal"
-                  type="number"
-                />
-              </div>
-              <div class="col-md-4">
-                <label class="form-label" for="txtNewOrderDiscount"
-                  >Discount</label
-                >
-                <input
-                  class="form-control form-control-sm"
-                  id="txtNewOrderDiscount"
-                  type="number"
-                />
-              </div>
-              <div class="col-md-4">
-                <label class="form-label" for="txtNewOrderSubTotal"
-                  >Sub Total</label
-                >
-                <input
-                  class="form-control form-control-sm"
-                  id="txtNewOrderSubTotal"
-                  type="number"
-                />
-              </div>
-              <div class="col-md-4">
-                <label class="form-label" for="txtNewOrderCash">Cash</label>
-                <input
-                  class="form-control form-control-sm"
-                  id="txtNewOrderCash"
-                  type="number"
-                />
-              </div>
-              <div class="col-md-4">
-                <label class="form-label" for="txtNewOrderBalance"
-                  >Balance</label
-                >
-                <input
-                  class="form-control form-control-sm"
-                  id="txtNewOrderBalance"
-                  type="number"
-                />
-              </div>
-              <div class="col-md-4">
-                <button
-                  class="btn btn-lg btn-success mt-4 col-12"
-                  type="button"
-                >
-                  Proceed
-                </button>
-              </div>
-            </div>
-          </div>
+
         </section>
       </section>
       <!---------------------- New Order End ---------------------->
