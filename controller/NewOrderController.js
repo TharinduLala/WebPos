@@ -63,6 +63,12 @@ $('#btnCalculate').click(function () {
 });
 
 $('#btnProceedOrder').click(function () {
+    let oId=$("#txtNewOrderId").val();
+    let oDate=$('#txtNewOrderDate').val();
+    let customer=$("#txtNewOrdercusId").val();
+    let total = $('#txtNewOrderTotal').val();
+    let discount=$('#txtNewOrderDiscount').val();
+    let netTotal=$('#txtNewOrderNetTotal').val();
     let orderDetail = [];
 
     $("#tblNewOrderCart tr").each(function() {
@@ -73,22 +79,16 @@ $('#btnProceedOrder').click(function () {
             this.cells[3].innerHTML
         ));
     });
+    orderDB.push(new OrderDto(oId,oDate,customer,total,discount,netTotal,orderDetail));
+    alert("Success");
+    cancelOrder();
 
 });
 $('#btnClearSelection').click(function () {
    clearSelection();
 });
 $('#btnCancelOrder').click(function () {
-    clearSelection();
-    setDate();setNewOrderId();
-    $('#btnProceedOrder').attr('disabled', false);
-    $('#txtNewOrderTotal').val("");
-    $('#txtNewOrderDiscount').val("");
-    $('#txtNewOrderNetTotal').val("");
-    $("#txtNewOrdercusId").val("");
-    $("#txtNewOrdercusName").val("");
-    $("#txtNewOrdercusAddress").val("");
-    $("#txtNewOrdercusContact").val("");
+    cancelOrder();
 });
 function deleteRow(btn) {
     /*let b=false;
@@ -125,7 +125,7 @@ function setNewOrderId() {
     if (orderDB.length === 0) {
         $("#txtNewOrderId").val("#Od-01");
     } else {
-        let last = (orderDB[orderDB.length - 1].getCustomerId().slice(5));
+        let last = (orderDB[orderDB.length-1].getOrderId().slice(5));
         let newValue = "#Od-0" + (parseInt(last) + 1);
         $("#txtNewOrderId").val(newValue);
     }
@@ -190,4 +190,17 @@ function clearSelection() {
     $('#txtNewOrderItemQtyOnH').val("");
     $('#txtNewOrderOrderedQty').val("");
     loadItemCodes();
+}
+function cancelOrder() {
+    clearSelection();
+    setDate();setNewOrderId();
+    $('#btnProceedOrder').attr('disabled', true);
+    $('#txtNewOrderTotal').val("");
+    $('#txtNewOrderDiscount').val("");
+    $('#txtNewOrderNetTotal').val("");
+    $("#txtNewOrdercusId").val("");
+    $("#txtNewOrdercusName").val("");
+    $("#txtNewOrdercusAddress").val("");
+    $("#txtNewOrdercusContact").val("");
+    $("#tblNewOrderCart").empty();
 }
