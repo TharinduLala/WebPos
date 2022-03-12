@@ -78,6 +78,7 @@ $('#btnProceedOrder').click(function () {
             this.cells[2].innerHTML,
             this.cells[3].innerHTML
         ));
+        updateQty(this.cells[0].innerHTML,this.cells[2].innerHTML);
     });
     orderDB.push(new OrderDto(oId,oDate,customer,total,discount,netTotal,orderDetail));
     alert("Success");
@@ -203,4 +204,15 @@ function cancelOrder() {
     $("#txtNewOrdercusAddress").val("");
     $("#txtNewOrdercusContact").val("");
     $("#tblNewOrderCart").empty();
+}
+
+function updateQty(itemCode,qty) {
+    let buyQty=parseInt(qty);
+    for (let i = 0; i < itemDB.length; i++) {
+        if (itemDB[i].getItemCode()===itemCode) {
+            let current =parseInt(itemDB[i].getQtyOnHand());
+            let newQty=current-buyQty;
+            itemDB[i].setQtyOnHand(newQty);
+        }
+    }
 }

@@ -22,10 +22,10 @@ function OrderDetailsDto(item,uniPrice,purchaseQty,total) {
     this.setPurchaseQty = function (q) {
         __purchaseQty=q;
     }
-    this.getTotal = function () {
+    this.getItemTotal = function () {
         return __total;
     }
-    this.setTotal = function (t) {
+    this.setItemTotal = function (t) {
         __total=t;
     }
 }
