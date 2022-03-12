@@ -13,4 +13,3 @@ Point Of Sales System UI interfaces created by using CSS framework(Bootstrap).
 <img style="width: 400px; height: auto;" src="assets/images/01.png" alt="preview01"> 
 <img style="width: 400px; height: auto;" src="assets/images/02.png" alt="preview02"> 
 <img style="width: 400px; height: auto;" src="assets/images/03.png" alt="preview03"> 
-<img style="width: 400px; height: auto;" src="assets/images/04.png" alt="preview04"> 
